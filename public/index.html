@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssistPericias - Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .login-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      margin: 100px auto 0;
+    }
+    .login-container h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .login-container .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .info {
+      text-align: center;
+      color: #555;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>AssistPericias</h1>
+    <form id="loginForm">
+      <input type="text" id="token" placeholder="Insira seu token de 
+acesso" value="12345">
+      <button type="submit">Entrar</button>
+      <div id="errorMessage" class="error"></div>
+    </form>
+    <div class="info">Para acessar, utilize o token: 
+<strong>12345</strong></div>
+    <div 
+style="text-align:center;margin-top:15px;font-size:12px;color:#999;">Versão 
+1.0</div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', 
+function(e) {
+      e.preventDefault();
+      const token = document.getElementById('token').value.trim();
+      
+      if (token === '12345') {
+        // Método simplificado - armazena direto e redireciona
+        localStorage.setItem('token', token);
+        window.location.href = '/dashboard';
+      } else {
+        document.getElementById('errorMessage').textContent = 'Token 
+inválido. Use 12345.';
+      }
+    });
+  </script>
+</body>
+</html>

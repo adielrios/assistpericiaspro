@@ -1,0 +1,29 @@
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+
+// Inicializar a aplicação Express
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Configurar middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// Rota principal - página de login
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
+
+// Rota dashboard
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'dashboard.html'));
+});
+
+// Iniciar o servidor
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Sistema AssistPericias iniciado na porta ${port}`);
+  console.log(`Acesse http://localhost:${port}`);
+});

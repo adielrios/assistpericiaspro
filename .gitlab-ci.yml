@@ -1,0 +1,33 @@
+image: python:3.9
+
+stages:
+  - test
+  - deploy
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+
+cache:
+  paths:
+    - .pip-cache/
+
+test:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - echo "Executando testes do AssistPericias Pro"
+    - python -c "print('Testes simulados executados com sucesso!')"
+  only:
+    - main
+    - merge_requests
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploy automático do AssistPericias Pro via Digital Ocean App Platform"
+    - echo "URL do aplicativo: https://www.assistpericias.com.br"
+  environment:
+    name: production
+    url: https://www.assistpericias.com.br
+  only:
+    - main

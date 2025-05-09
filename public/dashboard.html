@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssistPericias - Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="header">
+    <h2>AssistPericias</h2>
+    <div class="user-info">
+      <span id="userName">Dr. Adiel Carneiro Rios</span>
+      <button class="btn" onclick="logout()" style="margin-left: 
+15px;">Sair</button>
+    </div>
+  </div>
+  
+  <div class="sidebar">
+    <ul class="sidebar-menu">
+      <li class="active" data-page="dashboard">Dashboard</li>
+      <li data-page="pericias">Perícias</li>
+      <li data-page="processos">Processos</li>
+      <li data-page="laudos">Laudos</li>
+      <li data-page="configuracoes">Configurações</li>
+    </ul>
+  </div>
+  
+  <div class="content" id="content-area">
+    <div class="page" id="dashboard-page" style="display: block;">
+      <h2>Dashboard</h2>
+      
+      <div class="stats-container">
+        <div class="stat-card">
+          <h3>Perícias Pendentes</h3>
+          <div class="stat-number">3</div>
+        </div>
+        <div class="stat-card">
+          <h3>Processos Ativos</h3>
+          <div class="stat-number">12</div>
+        </div>
+        <div class="stat-card">
+          <h3>Laudos Emitidos</h3>
+          <div class="stat-number">8</div>
+        </div>
+        <div class="stat-card">
+          <h3>Alertas</h3>
+          <div class="stat-number">2</div>
+        </div>
+      </div>
+      
+      <div class="dashboard-card">
+        <h3>Próximas Perícias</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Paciente</th>
+              <th>Processo</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10/05/2025</td>
+              <td>João Silva</td>
+              <td>0001234-56.2025.8.26.0100</td>
+              <td>Agendada</td>
+            </tr>
+            <tr>
+              <td>15/05/2025</td>
+              <td>Maria Oliveira</td>
+              <td>0002345-67.2025.8.26.0100</td>
+              <td>Confirmada</td>
+            </tr>
+            <tr>
+              <td>20/05/2025</td>
+              <td>Pedro Santos</td>
+              <td>0003456-78.2025.8.26.0100</td>
+              <td>Pendente</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="dashboard-card">
+        <h3>Alertas Recentes</h3>
+        <ul>
+          <li style="margin-bottom:10px">Novo processo adicionado: 
+0004567-89.2025.8.26.0100</li>
+          <li style="margin-bottom:10px">Lembrete: Prazo para envio de 
+laudo expira em 5 dias</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Assistente Virtual -->
+  <div class="assistant-container" id="assistantContainer">
+    <div class="assistant-header" onclick="toggleAssistant()">
+      <span>Assistente Oscar</span>
+      <span class="assistant-toggle" id="assistantToggle">▲</span>
+    </div>
+    <div class="assistant-body" id="assistantBody" style="display:none">
+      <div class="assistant-messages" id="assistantMessages">
+        <div class="message message-assistant">
+          Olá, Dr. Adiel! Sou Oscar, seu assistente virtual. Como posso 
+ajudar hoje?
+        </div>
+      </div>
+      <div class="assistant-input">
+        <input type="text" id="assistantInput" placeholder="Digite sua 
+pergunta...">
+        <button onclick="sendQuestion()">Enviar</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Configurar menu de navegação
+    function configurarMenu() {
+      const menuItems = document.querySelectorAll('.sidebar-menu li');
+      
+      menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+          menuItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          
+          const page = item.getAttribute('data-page');
+          if (page) {
+            if (page !== 'dashboard') {
+              document.getElementById('content-area').innerHTML = `
+                <div class="dashboard-card">
+                  <h3>Módulo em Desenvolvimento</h3>
+                  <p>O módulo "${page}" está sendo implementado e estará 
+disponível em breve.</p>
+                </div>
+              `;
+            } else {
+              window.location.reload();
+            }
+          }
+        });
+      });
+    }
+
+    // Funções do assistente
+    function toggleAssistant() {
+      const body = document.getElementById('assistantBody');
+      const toggle = document.getElementById('assistantToggle');
+      
+      if (body.style.display === 'none') {
+        body.style.display = 'flex';
+        toggle.textContent = '▼';
+      } else {
+        body.style.display = 'none';
+        toggle.textContent = '▲';
+      }
+    }
+
+    function sendQuestion() {
+      const input = document.getElementById('assistantInput');
+      const question = input.value.trim();
+      
+      if (!question) return;
+      
+      input.value = '';
+      
+      const messages = document.getElementById('assistantMessages');
+      messages.innerHTML += `<div class="message 
+message-user">${question}</div>`;
+      
+      setTimeout(() => {
+        let response = "Desculpe, não entendi sua pergunta. Posso ajudar 
+com informações sobre perícias, laudos ou processos.";
+        
+        if (question.toLowerCase().includes("olá") || 
+question.toLowerCase().includes("oi")) {
+          response = "Olá! Como posso ajudar você hoje?";
+        } else if (question.toLowerCase().includes("perícia") || 
+question.toLowerCase().includes("pericia")) {
+          response = "As perícias são agendadas através do menu 
+'Perícias'. Posso ajudar você a navegar por lá se desejar.";
+        } else if (question.toLowerCase().includes("laudo")) {
+          response = "Os laudos podem ser gerados após a realização da 
+perícia. Acesse o menu 'Laudos' para criar ou visualizar laudos 
+existentes.";
+        } else if (question.toLowerCase().includes("processo")) {
+          response = "Você pode acompanhar todos os processos judiciais 
+através do menu 'Processos', incluindo verificar novas movimentações.";
+        }
+        
+        messages.innerHTML += `<div class="message 
+message-assistant">${response}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 500);
+      
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Logout
+    function logout() {
+      localStorage.removeItem('token');
+      window.location.href = '/';
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+      configurarMenu();
+    });
+  </script>
+</body>
+</html>

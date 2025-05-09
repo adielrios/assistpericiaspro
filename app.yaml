@@ -1,0 +1,26 @@
+name: assistpericias-adiel
+region: nyc
+services:
+- name: web
+  environment_slug: python
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: adielrios/assistpericias
+  build_command: pip install -r requirements.txt
+  run_command: gunicorn app:app
+  source_dir: /
+  envs:
+  - key: PORT
+    value: "8080"
+  - key: FLASK_ENV
+    value: "production"
+  - key: API_KEY
+    value: "ec9926f7e6cf669fd9bfbc010e01e4d4"
+    scope: RUN_TIME
+    type: SECRET
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /

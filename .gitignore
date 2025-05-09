@@ -1,0 +1,23 @@
+# Ambiente virtual
+venv/
+env/
+ENV/
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de log
+*.log
+
+# Diretório de backups de dados
+data/backups/
+
+# Ambiente local
+.env
+.env.local
+
+# Dependências de sistema
+.DS_Store
+Thumbs.db

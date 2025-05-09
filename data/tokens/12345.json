@@ -1,0 +1,11 @@
+{
+  "token": "12345",
+  "user": {
+    "id": 1,
+    "nome": "Dr. Adiel Carneiro Rios",
+    "email": "adiel.rios@abp.org.br",
+    "role": "admin",
+    "crm": "138355",
+    "cpf": "00688204538"
+  }
+}
