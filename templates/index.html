@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}AssistPericias Pro - Início{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-7">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Bem-vindo ao AssistPericias Pro</h2>
+                <p class="lead">
+                    Seu assistente de gerenciamento de perícias médicas.
+                </p>
+                <hr>
+                <p>
+                    O AssistPericias Pro foi desenvolvido para facilitar o controle de perícias médicas, 
+                    com funcionalidades como:
+                </p>
+                <ul>
+                    <li>Visualização de processos em que você foi nomeado</li>
+                    <li>Gerenciamento de datas e prazos importantes</li>
+                    <li>Geração automática de relatórios</li>
+                    <li>Assistente virtual para auxiliar no seu trabalho</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="/dashboard" class="btn btn-primary">
+                        <i class="bi bi-speedometer2"></i> Acessar Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="card-title"><i class="bi bi-robot"></i> Assistente Virtual</h3>
+                <div class="assistant-container" id="assistantContainer">
+                    <div class="assistant-messages" id="assistantMessages">
+                        <div class="message assistant">
+                            <div class="avatar">
+                                <img src="/static/images/avatar.jpg" alt="Dr. Adiel" id="assistantAvatar">
+                            </div>
+                            <div class="content">
+                                <p>Olá Dr. Adiel! Como posso ajudá-lo hoje?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assistant-input">
+                        <input type="text" id="assistantInput" class="form-control" placeholder="Digite sua pergunta...">
+                        <button id="assistantSend" class="btn btn-primary">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"><i class="bi bi-calendar-check"></i> Próximas Perícias</h3>
+                <div id="proximasPericias">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/assistant.js"></script>
+<script src="/static/js/home.js"></script>
+{% endblock %}
