@@ -1,23 +1,10 @@
-# Ambiente virtual
-venv/
-env/
-ENV/
-
-# Cache do Python
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Arquivos de log
-*.log
-
-# Diretório de backups de dados
-data/backups/
-
-# Ambiente local
+*.class
 .env
-.env.local
-
-# Dependências de sistema
+.venv
+env/
+venv/
+ENV/
 .DS_Store
-Thumbs.db
+*.log
